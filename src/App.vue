@@ -1,5 +1,16 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <discuss></discuss>
+  </div>
 </template>
-
-<style></style>
+<script>
+  import discuss from "./components/discuss/discuss";
+export default {
+    name:"app",
+    components:{
+      discuss
+    }
+};
+</script>
+<style>
+</style>
