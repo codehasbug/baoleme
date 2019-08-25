@@ -1,5 +1,5 @@
 <template>
-    <div class="discuss" ref="scroll" :options="scrollOptions">
+    <cube-scroll ref="scroll" class="discuss" :options="scrollOptions">
         <div class="head">
             <div class="left">
                 <div class="score">{{seller.score}}</div>
@@ -38,17 +38,10 @@
             </div>
         </div>
         <div class="split"></div>
-        <div class="middle">
-            <div class="select border-bottom-1px">
-                <span @click="select(2)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span>
-                <span @click="select(0)" class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
-                <span @click="select(1)" class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
-            </div>
-            <div class="switch" :class="{'on':onlyContent}">
-                <span class="icon-check_circle"></span>
-                <span class="text" style="font-size:12px;color: #999999">只看有内容的评价</span>
-            </div>
-        </div>
+        <discuss-select
+                @select="onSelect"
+                @toggle="onToggle"
+                :selectType="selectType" :onlyContent="onlyContent" :ratings="ratings"></discuss-select>
         <div class="foot">
             <ul style="list-style-type: none">
                 <li v-for="(rating,index) in ratings" :key="index" class="rating-item">
@@ -65,79 +58,41 @@
                             <span class="icon-thumb_up"></span>
                             <span class="item" v-for="(item,index) in rating.recommend" :key="index">{{item}}</span>
                         </div>
-
+                        <div class="Datetime">
+                            {{format(rating.rateTime)}}
+                        </div>
                     </div>
                 </li>
             </ul>
         </div>
-    </div>
+    </cube-scroll>
 </template>
 
 <script>
     import {getRatings} from "../../api";
     import {getSeller} from "../../api";
+    import DiscussSelect from "../disuss-select/discuss-select"
+    import discussMixin from "../../common/mixins/discuss"
+    import moment from 'moment'
 
-    const POSITIVE=0
-    const NEGATIVE=1
-    const ALL=2
-
-    const EVENT_TOGGLE='toggle'
-    const EVENT_SELECT='select'
     export default {
         name: "discuss",
+        mixins:[discussMixin],
         props:{
                data:{
                    type:Object
                },
-            selectType:{
-                type:Number,
-                default:ALL
-            },
-            onlyContent:{
-                type:Boolean,
-                default:false
-            },
-            desc:{
-                type:Object,
-                default(){
-                    return {
-                        all:"全部",
-                        positive:"满意",
-                        negative:"不满意"
-                    }
-                }
-            }
             },
         data(){
             return {
                 ratings:[],
                 seller:[],
                 scrollOptions:{
-                    click:false,
+                    click: false,
                     directionLockThreshold:0
             }
         }
 },
-        computed:{
-            positives(){
-                return this.ratings.filter((rating)=>{
-                    return rating.rateType===POSITIVE
-                })
-            },
-            negatives(){
-                return this.ratings.filter((rating)=>{
-                    return rating.rateType===NEGATIVE
-                })
-            },
-        },
-        methods:{
-            select(type){
-                this.$emit(EVENT_SELECT,type)
-            },
-            toggleContent(){
-                this.$emit(EVENT_TOGGLE)
-            }
-        },
         created() {
             getRatings().then(res=>{
                 this.ratings = res;
@@ -147,6 +102,19 @@
                 this.seller=res1;
              })
         },
+        watch: {
+            selectType() {
+                this.$nextTick(() => {
+                    this.$refs.scroll.refresh()
+                })
+            }
+        },
+        methods:{
+            format(time){
+                return moment(time).format('YYYY-MM-DD hh:mm')
+            }
+        },
+        components: {DiscussSelect},
     }
 </script>
 
@@ -219,28 +187,6 @@
         border-bottom: 1px solid rgba(7,17,27,0.1);
         background: #f3f5f7;
     }
-    .select{
-        padding: 18px 0;
-        margin: 0 18px;
-    }
-    .block{
-        display:inline-block;
-        padding: 8px 12px;
-        margin-right: 8px;
-        line-height: 16px;
-        border-radius: 1px;
-        font-size: 12px;
-    }
-    .switch {
-        display: flex;
-        align-items: center;
-        padding: 12px 18px;
-        line-height: 24px;
-        border-bottom: 1px solid rgba(7, 17, 27, 0.2);
-        color: #999999;
-        margin-right: 4px;
-        font-size: 12px;
-    }
     .foot{
         padding: 0 18px;
     }
@@ -305,5 +251,13 @@
     .icon-check_circle{
         font-size large;
         margin-right 4px;
+    }
+    .Datetime{
+        position absolute;
+        top:0;
+        right 0;
+        line-height 12px
+        font-size small
+        color:#999999
     }
 </style>
