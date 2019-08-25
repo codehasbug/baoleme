@@ -72,7 +72,7 @@
 <div class="info">
     <h1 class="title border-bottom-1px"> 商家信息</h1>
     <ul>
-      <li class="info-item"
+      <li class="info-item border-bottom-1px"
       v-for="(info,index) in seller.infos"
           :key="index">{{info}}</li>
     </ul>
