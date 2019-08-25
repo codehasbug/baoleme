@@ -15,13 +15,13 @@
             </div></li>
                 <li>
             <div class="manjian">
-                <img>
+                <img src="../img/decrease_1@3x.png" class="jian">
                 <span class="edu">{{seller.supports[0].description}}</span>
             </div></li>
             </ul>
         </div>
         <div class="bottom">
-            <span class="bottom-title">公告</span>
+            <span class="bottom-title"></span>
             <span class="bottom-text">{{seller.bulletin}}</span>
             <i class="icon-keyboard_arrow_right"></i>
         </div>
@@ -95,6 +95,7 @@
         margin-bottom: 8px;
     }
     .brand {
+        background-image: url("../img/brand@2x.png");
         width: 30px;
         height: 18px;
         background-size: 30px 18px;
@@ -113,6 +114,11 @@
     .manjian{
         display: flex;
         align-items: center;
+    }
+    .jian{
+        margin-right: 4px;
+        height: 15px;
+        width: 15px;
     }
     .edu{
         line-height: 12px;
@@ -135,8 +141,10 @@
     .bottom-title{
         width: 30px;
         background-size: 22px 12px;
-        font-size: 12px;
-        background-color: rgba(5,15,25,0.1);
+        height: 12px;
+        margin-right: 4px;
+        background-image: url("../img/bulletin@2x.png");
+        background-repeat: no-repeat;
     }
     .bottom-text{
         flex: 1;
