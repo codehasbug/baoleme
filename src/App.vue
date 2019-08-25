@@ -1,5 +1,23 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <Head></Head>
+  </div>
 </template>
 
-<style></style>
+<script>
+
+  import Head from './components/head.vue'
+
+  export default {
+    name: 'app',
+    components: {
+      Head
+    }
+  }
+</script>
+
+<style>
+  #app {
+
+  }
+</style>
