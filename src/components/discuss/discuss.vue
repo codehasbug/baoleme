@@ -1,5 +1,5 @@
 <template>
-    <cube-scroll ref="scroll" class="discuss" :options="scrollOptions">
+    <div ref="scroll" class="discuss" :options="scrollOptions">
         <div class="head">
             <div class="left">
                 <div class="score">{{seller.score}}</div>
@@ -9,26 +9,12 @@
             <div class="right">
                 <div class="score-wrapper">
                     <span class="score-title">服务态度</span>
-                    <div class="six-star">
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-off"></span>
-                    </div>
+                    <star :size="36" :score="seller.serviceScore"></star>
                     <span class="score1">{{seller.serviceScore}}</span>
                 </div>
                 <div class="score-wrapper">
                     <span class="score-title">商品评分</span>
-                    <div class="six-star">
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-on"></span>
-                        <span class="star-item-off"></span>
-                    </div>
+                    <star :size="36" :score="seller.foodScore"></star>
                     <span class="score1">{{seller.foodScore}}</span>
                 </div>
                 <div class="time-wrapper">
@@ -51,6 +37,7 @@
                     <div class="content">
                         <h1 class="name">{{rating.username}}</h1>
                         <div class="star-wrapper">
+                            <star :size="24" :score="rating.score"></star>
                             <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
                         </div>
                         <p class="foot-text">{{rating.text}}</p>
@@ -65,7 +52,7 @@
                 </li>
             </ul>
         </div>
-    </cube-scroll>
+    </div>
 </template>
 
 <script>
@@ -73,6 +60,7 @@
     import {getSeller} from "../../api";
     import DiscussSelect from "../disuss-select/discuss-select"
     import discussMixin from "../../common/mixins/discuss"
+    import star from "../star/star"
     import moment from 'moment'
 
     export default {
@@ -102,19 +90,19 @@
                 this.seller=res1;
              })
         },
-        watch: {
-            selectType() {
-                this.$nextTick(() => {
-                    this.$refs.scroll.refresh()
-                })
-            }
-        },
         methods:{
             format(time){
                 return moment(time).format('YYYY-MM-DD hh:mm')
             }
         },
-        components: {DiscussSelect},
+        watch: {
+            selectType () {
+                this.$nextTick(() => {
+                    this.$refs.scroll.refresh()
+                })
+            }
+        },
+        components: {DiscussSelect,star},
     }
 </script>
 
