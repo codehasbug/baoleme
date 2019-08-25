@@ -10,10 +10,9 @@
 </template>
 
 <script>
-// import Goods from "@/components/goods/goods";
 import Head from "@/components/head/head";
 import Tab from "@/components/tab/tab";
-import Test from "@/components/test/test";
+import Goods from "@/components/goods/goods";
 import Seller from "@/components/seller/seller";
 import Disscuss from "@/components/discuss/discuss";
 export default {
@@ -23,7 +22,7 @@ export default {
       tabs: [
         {
           label: "商品",
-          component: Test
+          component: Goods
         },
         {
           label: "评论",
