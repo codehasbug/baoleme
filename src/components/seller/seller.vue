@@ -1,29 +1,40 @@
 <template >
     <cube-scroll ref="scroll" :option="scrollOptions">
-
+<div>
     <div class="layout">
-        <div>
-            <div class="title" style="margin-left: 5px">{{seller.name}}</div>
+
+
+        <div class="overview">
+            <div class="title" style="margin-left: 5px;margin-top: 10px">{{seller.name}}</div>
             <div class="desc ">
 <!--                   <el-rate v-model="value" disabled show-score text-color="#ff9900" score-template="{value}" style="text-align: left">-->
 <!--                </el-rate>-->
                 <star :size="36" :score="seller.score" style="margin-left: 5px">></star>
                 <div class="text" style="position:relative;"> 月售{{seller.sellCount}}</div>
             </div>
-            <div class="favorite"  @click="toggleFavorite" style="margin-bottom:0px">
-            <span class="icon-favorite" :class="{'active':favorite}" >
-            </span>
-                <span class="collect" >{{favoriteText}}</span>
-            </div>
+
+            <button class="button" @click="favorite=!favorite" style="position: absolute;width: 60px;right: 15px;top: 45px;
+                    vertical-align: middle;text-align: center;">
+              {{show()}}
+            </button>
+
         </div>
+
+
+
+
+
+
+
+
+
+
         <br>
-
         <div class="split"></div>
-
-<!--       <div style="position: absolute;left:5px;top:120px;width: 370px;height: 50px">-->
         <ul class="remark" style="display:flex">
+
             <li class="block" style="float:left;flex:1">
-            <h2 style="text-align: center">起送价</h2>
+                <h2 style="text-align: center">起送价</h2>
                 <div class="content border-right-1px" style="text-align: center">
                     <span class="stress">{{seller.minPrice}}</span>
                 </div>
@@ -38,8 +49,7 @@
             </li>
         </ul>
         <div class="split"></div>
-
-<div class="bulletin">
+        <div class="bulletin">
     <h1 class="title">公告与活动</h1>
     <div class="content-wrapper">
         <p class="content border-bottom-1px">{{seller.bulletin}}
@@ -68,11 +78,9 @@
                 </li>
             </ul>
         </div>
-
-<br><br><br><br>
+        <br><br><br><br>
         <div class="split"></div>
-
-<div class="info">
+        <div class="info">
     <h1 class="title border-bottom-1px"> 商家信息</h1>
     <ul>
       <li class="info-item border-bottom-1px"
@@ -81,6 +89,7 @@
     </ul>
 </div>
     </div>
+</div>
     </cube-scroll>
 
 </template>
@@ -91,7 +100,6 @@
     import {getSeller} from "../../api";
     // import separation from "../separation";
     //import SupportIco from "../support-ico/support-ico"
-
 
     export default {
 
@@ -120,8 +128,10 @@
         methods:{
                 toggleFavorite(){
                     this.favorite=!this.favorite;
-
-                }
+                },
+            show(){
+                    return this.favorite?'已收藏':'收藏'
+            }
         },
             created() {
                 getSeller().then(res=>{
@@ -136,6 +146,16 @@
     /*@import "~common/stylus/variable"*/
     /*@import "~common/stylus/mixin"*/
     @import "../../common/stylus/icon.styl"
+    .button{
+        -webkit-border-radius: 29;
+        -moz-border-radius: 29;
+        border-radius: 29px;
+        text-shadow: 0px 1px 30px #283966;
+        font-family:"微软雅黑";
+        background :#f2cd00;
+        color: #ffffff;
+        opacity:0.8;
+    }
     .split{
         width: 100%;
         height: 16px;
@@ -145,8 +165,8 @@
     }
     .layout
     {
-        height:638px;
-        width:370px;
+        position: relative;
+        overflow: hidden;
         text-align: left;
     }
     .title{
@@ -185,9 +205,11 @@
             font-size: large
             color: lightgrey
     }
-    &.active {
+    &.active
+    {
         color: red
     }
+
 
     .collect{
         line-height: 10px
