@@ -5,12 +5,10 @@
           :data="data"
           :options="scrollOptions"
           >
-          <!-- <ul class="prepend-header" slot="prepend">
-            <li></li>
-          </ul> -->
           <cube-scroll-nav-panel
             v-for="item in data"
             :key="item.name"
+            :checkTop="true"
             :label="item.name"
             :title="item.name">
             <ul>
@@ -107,9 +105,10 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "../../common/stylus/icon.styl"
 .goods
-  position: relative
+  position: fixed
   text-align: left
-  height: 90%
+  width 33.3333%
+  height: 100%
   >>> .cube-scroll-nav-bar
     width: 80px
     white-space: normal
@@ -120,6 +119,12 @@
     align-items: center
     height: 56px
     line-height: 14px
+  >>> .cube-scroll-nav-panel-title
+    padding: 15px
+    font-size: 16px
+    background-color: #fff
+  >>> .cube-sticky-content
+    height: 100%
   .food-item
     display: flex
     margin: 18px

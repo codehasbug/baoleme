@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="shop_car">
-      <div class="content" @click="UpList">
+      <div class="content" >
         <div class="content-left">
           <div class="logo_style">
             <div class="logo" v-bind:class="{ highlightB: Count > 0 }">
