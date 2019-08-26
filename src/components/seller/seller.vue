@@ -74,7 +74,7 @@
                 v-for="(pic,index) in seller.pics"
                 :key="index">
 
-                    <img :src="pic" width="70px" height="70px">
+                    <img :src="pic" width="66px" height="70px">
                 </li>
             </ul>
         </div>
