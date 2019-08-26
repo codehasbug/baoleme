@@ -10,7 +10,8 @@
             :key="item.name"
             :checkTop="true"
             :label="item.name"
-            :title="item.name">
+            :title="item.name"
+            >
             <ul>
               <li v-for="food in item.foods" :key="food.name" class="food-item">
                 <div class="icon">
@@ -108,7 +109,7 @@
   position: fixed
   text-align: left
   width 33.3333%
-  height: 100%
+  height: 90%
   >>> .cube-scroll-nav-bar
     width: 80px
     white-space: normal

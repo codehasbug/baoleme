@@ -37,34 +37,24 @@
 
 
 
-    export default {
-        name: 'Head',
-
-        props: {
-        seller: {
-          type: Object,
-          default() {
-            return {}
-          }
-        }
-      },
-      methods:{
-
-      },
-        components:{
-
-        },
-      created() {
-        getRatings().then(res=>{
-          this.ratings = res;
-        });
-        getSeller().then(res1=>{
-          this.seller=res1;
-        })
-      },
-
-
+export default {
+    name: 'Head',
+    data() {
+    return{
+        seller:[]
     }
+    },
+    created() {
+    getRatings().then(res=>{
+        this.ratings = res;
+    });
+    getSeller().then(res1=>{
+        this.seller=res1;
+    })
+    },
+
+
+}
 </script>
 
 <style scoped>
