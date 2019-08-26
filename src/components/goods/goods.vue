@@ -28,7 +28,7 @@
                     <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <ul class="btn">
-                    <li class="sub icon-remove_circle_outline" v-show="food.count>0" @click="subFood(food)"></li><span v-show="food.count">{{food.count}}</span>
+                    <li class="sub icon-remove_circle_outline" v-show="food.count>0" @click="subFood(food)"><span class="count">{{food.count}}</span></li>
                     <li class="add icon-add_circle" @click="addFood(food)"></li>
                   </ul>
                 </div>
@@ -104,11 +104,12 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+@import "../../common/stylus/variable.styl"
 @import "../../common/stylus/icon.styl"
 .goods
-  position: fixed
+  position: relative
   text-align: left
-  width 33.3333%
+  width 100%
   height: 90%
   >>> .cube-scroll-nav-bar
     width: 80px
@@ -124,8 +125,6 @@
     padding: 15px
     font-size: 16px
     background-color: #fff
-  >>> .cube-sticky-content
-    height: 100%
   .food-item
     display: flex
     margin: 18px
@@ -141,17 +140,21 @@
         height: auto
     .content
       flex: 1
+      width 200px
       .btn
         text-align right 
         float right   
         width 100px
         font-size 20px
-        span
-          margin 5px
-          font-weight 700
         .sub
           display inline
           color rgb(0,160,250)
+          .count
+            margin-left: 5px
+            margin-right: 6px
+            font-size 18px
+            line-height 20px
+            color #666666
         .add
           display inline
           color rgb(0,160,250)
@@ -168,6 +171,11 @@
       .desc
         line-height: 12px
         margin-bottom: 8px
+        width: 100%
+        height: auto
+        word-wrap:break-word
+        word-break:break-all
+        overflow: hidden
       .extra
         .count
           margin-right: 12px

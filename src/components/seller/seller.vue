@@ -14,7 +14,7 @@
             </div>
 
             <button class="button" @click="favorite=!favorite" style="position: absolute;width: 60px;right: 15px;top: 45px;
-                    vertical-align: middle;text-align: center;">
+                    vertical-align: middle;text-align: center; border: none;">
               {{show()}}
             </button>
 
@@ -74,7 +74,7 @@
                 v-for="(pic,index) in seller.pics"
                 :key="index">
 
-                    <img :src="pic" width="66px" height="70px">
+                    <img :src="pic" width="66px" height="66px">
                 </li>
             </ul>
         </div>
