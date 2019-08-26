@@ -1,23 +1,24 @@
 <template >
-    <div>
-        <hr style="border-bottom-color: lightslategray;width: 370px">
+    <cube-scroll ref="scroll" :option="scrollOptions">
 
     <div class="layout">
         <div>
-            <div class="title">{{seller.name}}</div>
+            <div class="title" style="margin-left: 5px">{{seller.name}}</div>
             <div class="desc ">
-                   <!-- <el-rate v-model="value" disabled show-score text-color="#ff9900" score-template="{value}" style="text-align: left">
-                </el-rate> -->
+<!--                   <el-rate v-model="value" disabled show-score text-color="#ff9900" score-template="{value}" style="text-align: left">-->
+<!--                </el-rate>-->
+                <star :size="36" :score="seller.score" style="margin-left: 5px">></star>
                 <div class="text" style="position:relative;"> 月售{{seller.sellCount}}</div>
             </div>
-            <div class="favorite"  @click="toggleFavorite">
+            <div class="favorite"  @click="toggleFavorite" style="margin-bottom:0px">
             <span class="icon-favorite" :class="{'active':favorite}" >
             </span>
-                <span class="collect">{{favoriteText}}</span>
+                <span class="collect" >{{favoriteText}}</span>
             </div>
         </div>
+        <br>
 
-        <hr style="border-bottom-color: lightslategray;width: 370px ">
+        <div class="split"></div>
 
 <!--       <div style="position: absolute;left:5px;top:120px;width: 370px;height: 50px">-->
         <ul class="remark" style="display:flex">
@@ -36,7 +37,7 @@
                 <div class="content" style="text-align: center"><span class="stress">{{seller.deliveryTime}}</span></div>
             </li>
         </ul>
-        <hr style="border-bottom-color: lightslategray;width: 370px">
+        <div class="split"></div>
 
 <div class="bulletin">
     <h1 class="title">公告与活动</h1>
@@ -47,42 +48,45 @@
             <li class="support-item border-bottom-1px"
                 v-for="(item,index) in seller.supports"
                 :key="index">
-                <span class="text">{{index+1}}.{{seller.supports[index].description}}</span>
+                <support-ico :size=4 :type="seller.supports[index].type" ></support-ico>
+                <span class="text">{{seller.supports[index].description}}</span>
 
             </li>
         </ul>
 
     </div>
 </div>
-        <hr style="border-bottom-color: lightslategray;width: 370px">
+        <div class="split"></div>
         <div class="pics">
             <h1 class="title">商家实景</h1>
             <ul class="pic-list">
                 <li class="pic-item " style="float:left;margin-right:6px"
                 v-for="(pic,index) in seller.pics"
                 :key="index">
+
                     <img :src="pic" width="70px" height="70px">
                 </li>
             </ul>
         </div>
 
 <br><br><br><br>
-        <hr style="border-bottom-color: lightslategray;width: 370px">
+        <div class="split"></div>
 
 <div class="info">
     <h1 class="title border-bottom-1px"> 商家信息</h1>
     <ul>
-      <li class="info-item"
+      <li class="info-item border-bottom-1px"
       v-for="(info,index) in seller.infos"
           :key="index">{{info}}</li>
     </ul>
 </div>
     </div>
-    </div>
+    </cube-scroll>
 
 </template>
 <script>
-    // import Star from 'components/star/star'
+     import star from "../star/star"
+     import SupportIco from "../support-ico/support-ico"
     // import Split from 'components/split/split'
     import {getSeller} from "../../api";
     // import separation from "../separation";
@@ -94,14 +98,18 @@
         data(){
            return{ seller:[],
            favorite:false,
-               value:3.7
-           }
-        },
+               scrollOptions:{
+               click:false,
+                   directionLockThreshold:0
+               }
+               }
+           },
         components:{
             //separation
-          //  SupportIco,
+          SupportIco,
             // Star,
             // Split
+            star
 
         },
         computed:{
@@ -128,7 +136,13 @@
     /*@import "~common/stylus/variable"*/
     /*@import "~common/stylus/mixin"*/
     @import "../../common/stylus/icon.styl"
-
+    .split{
+        width: 100%;
+        height: 16px;
+        border-top: 1px solid rgba(7,17,27,0.1);
+        border-bottom: 1px solid rgba(7,17,27,0.1);
+        background: #f3f5f7;
+    }
     .layout
     {
         height:638px;
@@ -166,7 +180,7 @@
     .icon-favorite
     {
             display: block
-            margin-bottom: 4px
+            margin-bottom: 0px
             line-height: 24px
             font-size: large
             color: lightgrey
@@ -230,7 +244,7 @@
             .title
                 margin-bottom: 8px
                 line-height: 14px
-                color: darkgrey
+                color: black
                 font-size: medium
             .content-wrapper
                 padding: 0 12px 16px 12px
@@ -250,7 +264,7 @@
                 .text
                     line-height: 16px
                     font-size: small
-                    color: darkgrey
+                    color: black
         .pics
         {
             padding: 18px
@@ -260,7 +274,7 @@
             .title
                 margin-bottom: 12px
                 line-height: 14px
-                color: darkgrey
+                color: black
                 font-size: medium
 
             .pic-wrapper
@@ -279,7 +293,7 @@
         .info
         {
             padding: 18px 18px 0 18px
-            color: darkgrey
+            color: black
         }
 
             .title

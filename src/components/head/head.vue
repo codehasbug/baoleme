@@ -90,7 +90,7 @@
     .description{
         margin-bottom: 8px;
         line-height: 12px;
-        font-size: 6px;
+        font-size: 10px;
     }
     .manjian{
         display: flex;
@@ -98,7 +98,7 @@
     }
     .edu{
         line-height: 12px;
-        font-size:6px;
+        font-size:10px;
     }
     .icon-keyboard_arrow_right{
         margin-left: 2px;
@@ -125,7 +125,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size:6px;
+        font-size:10px;
     }
     .background {
         position: absolute;

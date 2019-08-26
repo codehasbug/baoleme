@@ -139,6 +139,7 @@
         text-align right 
         float right   
         width 100px
+        font-size 20px
         span
           margin 5px
           font-weight 700
