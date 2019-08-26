@@ -15,13 +15,13 @@
             </div></li>
                 <li>
             <div class="manjian">
-                <img>
+                <img src="../img/decrease_1@3x.png" class="jian">
                 <span class="edu">{{seller.supports[0].description}}</span>
             </div></li>
             </ul>
         </div>
         <div class="bottom">
-            <span class="bottom-title">公告</span>
+            <span class="bottom-title"></span>
             <span class="bottom-text">{{seller.bulletin}}</span>
             <i class="icon-keyboard_arrow_right"></i>
         </div>
@@ -34,13 +34,26 @@
 <script>
   import {getRatings} from "@/api";
   import {getSeller} from "@/api";
+
+
+
     export default {
         name: 'Head',
-        data() {
-          return {
-            seller:[]
+
+        props: {
+        seller: {
+          type: Object,
+          default() {
+            return {}
           }
+        }
       },
+      methods:{
+
+      },
+        components:{
+
+        },
       created() {
         getRatings().then(res=>{
           this.ratings = res;
@@ -49,10 +62,13 @@
           this.seller=res1;
         })
       },
+
+
     }
 </script>
 
 <style scoped>
+
     .Head{
         position: relative;
         overflow: hidden;
@@ -70,6 +86,7 @@
     }
     .img{
         border-radius: 2px;
+
     }
     .title {
         display: flex;
@@ -77,6 +94,7 @@
         margin-bottom: 8px;
     }
     .brand {
+        background-image: url("../img/brand@2x.png");
         width: 30px;
         height: 18px;
         background-size: 30px 18px;
@@ -90,15 +108,20 @@
     .description{
         margin-bottom: 8px;
         line-height: 12px;
-        font-size: 10px;
+        font-size: 6px;
     }
     .manjian{
         display: flex;
         align-items: center;
     }
+    .jian{
+        margin-right: 4px;
+        height: 15px;
+        width: 15px;
+    }
     .edu{
         line-height: 12px;
-        font-size:10px;
+        font-size:6px;
     }
     .icon-keyboard_arrow_right{
         margin-left: 2px;
@@ -117,15 +140,17 @@
     .bottom-title{
         width: 30px;
         background-size: 22px 12px;
-        font-size: 12px;
-        background-color: rgba(5,15,25,0.1);
+        height: 12px;
+        margin-right: 4px;
+        background-image: url("../img/bulletin@2x.png");
+        background-repeat: no-repeat;
     }
     .bottom-text{
         flex: 1;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size:10px;
+        font-size:6px;
     }
     .background {
         position: absolute;
@@ -140,4 +165,6 @@
     .ul{
         list-style:none;
     }
+
+
 </style>
