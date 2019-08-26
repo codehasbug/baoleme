@@ -30,7 +30,7 @@
                 :selectType="selectType" :onlyContent="onlyContent" :ratings="ratings"></discuss-select>
         <div class="foot">
             <ul style="list-style-type: none">
-                <li v-for="(rating,index) in ratings" :key="index" class="rating-item">
+                <li v-for="(rating,index) in computedRatings" :key="index" class="rating-item">
                     <div class="avatar">
                         <img width="28" height="28" :src="rating.avatar" class="img">
                     </div>
@@ -92,7 +92,7 @@
         methods:{
             format(time){
                 return moment(time).format('YYYY-MM-DD hh:mm')
-            }
+            },
         },
         watch: {
             selectType () {
