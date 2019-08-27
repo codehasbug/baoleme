@@ -171,11 +171,7 @@
       .desc
         line-height: 12px
         margin-bottom: 8px
-        width: 100%
-        height: auto
-        word-wrap:break-word
-        word-break:break-all
-        overflow: hidden
+        width 180px
       .extra
         .count
           margin-right: 12px
